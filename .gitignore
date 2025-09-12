@@ -1,0 +1,36 @@
+# API Keys and Secrets
+*.env
+.env.*
+**/api_keys/
+**/.deepeval/.deepeval
+**/.deepeval/*.json
+
+# Model keys and credentials
+azure_credentials.json
+openai_credentials.json
+google_credentials.json
+anthropic_credentials.json
+
+# Database files (may contain sensitive data)
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+temp/
+
+# IDE and OS files
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs that might contain sensitive info
+*.log
+logs/
+**/__pycache__/
+*.pyc

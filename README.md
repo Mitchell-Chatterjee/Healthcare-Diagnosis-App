@@ -1,6 +1,6 @@
-# Iris API Development Guide
+# Healthcare API Development Guide
 
-This guide defines the standard structure and patterns for developing new agents, teams, and workflows in the Iris Agentic system.
+This guide defines the standard structure and patterns for developing new agents, teams, and workflows in the Healthcare Agentic system.
 
 > ⚠️ **Security Notice**: Before using this package, please review the [SECURITY.md](./SECURITY.md) file for important information about API keys and secure configuration.
 
@@ -88,7 +88,7 @@ touch agents/my_agent/{__init__.py,__main__.py,agent.py,prompts.py}
 #### 2. **Implement the Agent** (`agent.py`)
 ```python
 from agno.agent import Agent
-from iris.api.common.models import mistral_small_32
+from healthcare.api.common.models import mistral_small_32
 from .prompts import my_agent_description, my_agent_instructions
 from .schemas import MyAgentResponse  # optional
 
@@ -148,7 +148,7 @@ __all__ = ["MyAgent", "MyAgentRequest", "MyAgentResponse"]
 #### 6. **Entry Point** (`__main__.py`)
 ```python
 #!/usr/bin/env python3
-from iris.api.agents.my_agent import MyAgent
+from healthcare.api.agents.my_agent import MyAgent
 
 if __name__ == "__main__":
     agent = MyAgent()
@@ -161,8 +161,8 @@ if __name__ == "__main__":
 #### 1. **Team Implementation** (`team.py`)
 ```python
 from agno.team import Team
-from iris.api.agents.agent_a import AgentA
-from iris.api.agents.agent_b import AgentB
+from healthcare.api.agents.agent_a import AgentA
+from healthcare.api.agents.agent_b import AgentB
 from .roles import define_team_roles
 from .schemas import TeamResponse
 
@@ -195,8 +195,8 @@ def define_team_roles():
 #### 1. **Workflow Implementation** (`workflow.py`)
 ```python
 from agno.workflow.v2 import Workflow, Step
-from iris.api.agents.my_agent import MyAgent
-from iris.api.teams.my_team import MyTeam
+from healthcare.api.agents.my_agent import MyAgent
+from healthcare.api.teams.my_team import MyTeam
 from .steps import custom_processing_step
 
 class MyWorkflow(Workflow):
@@ -256,7 +256,7 @@ Update `.vscode/launch.json` with a new debug configuration:
   "name": "Python: Debug my_agent",
   "type": "debugpy", 
   "request": "launch",
-  "module": "iris.api.agents.my_agent",
+  "module": "healthcare.api.agents.my_agent",
   "console": "integratedTerminal",
   "cwd": "${workspaceFolder}/src"
 }
@@ -265,9 +265,9 @@ Update `.vscode/launch.json` with a new debug configuration:
 ### 3. **Running Components**
 ```bash
 # Run as module
-uv run python -m iris.api.agents.my_agent
-uv run python -m iris.api.teams.my_team  
-uv run python -m iris.api.workflows.my_workflow
+uv run python -m healthcare.api.agents.my_agent
+uv run python -m healthcare.api.teams.my_team  
+uv run python -m healthcare.api.workflows.my_workflow
 ```
 
 ## 📋 Naming Conventions
@@ -311,13 +311,13 @@ Capture the workflow session dict in a router factory instead of passing it thro
 ```py
 def create_router_selector(session_state: dict):
     def selector(step_input):
-        req = WorkflowStateAdapter.get_object(session_state, IrisRequest)
+        req = WorkflowStateAdapter.get_object(session_state, healthcareRequest)
         return [general_knowledge_pipeline]
     return selector
 
 # pass the same dict into the router when building the Workflow
 workflow_session_state = {}
-steps = [..., create_iris_pipeline_router(workflow_session_state)]
+steps = [..., create_healthcare_pipeline_router(workflow_session_state)]
 ```
 
 
@@ -326,7 +326,7 @@ steps = [..., create_iris_pipeline_router(workflow_session_state)]
 Components that observe and report on system behavior, agent performance, and workflow metrics.
 
 ### **Adapters** (`adapters/`)
-Interface components that connect external systems, APIs, or data sources to the Iris ecosystem.
+Interface components that connect external systems, APIs, or data sources to the healthcare ecosystem.
 
 ### **Policies** (`policies/`)
 Configurable rule sets that govern agent behavior, content filtering, and access control.

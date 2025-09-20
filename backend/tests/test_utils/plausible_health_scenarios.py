@@ -6,7 +6,8 @@ from dataclasses import dataclass
 from typing import List, Dict
 from deepeval.test_case import ToolCall
 
-from agno_test.agents.healthcare.agents.medical_test.medical_test_agent import MedicalTestAgent
+from backend.src.agentic.agents.medical_test_agent.agent import MedicalTestAgent
+
 
 
 @dataclass

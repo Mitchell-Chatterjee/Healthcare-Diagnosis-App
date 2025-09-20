@@ -5,8 +5,10 @@ from functools import partial
 from deepeval import assert_test
 from deepeval.dataset import Golden
 from deepeval.tracing import observe, update_current_span
-from agno_test.agents.healthcare.test_utils.plausible_health_scenarios import all_test_scenarios, HealthcareScenario
-from agno_test.agents.healthcare.healthcare_workflow import HealthcareWorkflow
+
+from src.agentic.workflows.healthcare_workflow.workflow import HealthcareWorkflow
+from tests.test_utils.plausible_health_scenarios import HealthcareScenario
+from tests.test_utils.plausible_health_scenarios import all_test_scenarios
 
 healthcare_workflow = HealthcareWorkflow(use_storage=False)
 # healthcare_workflow.workflow_session_state["eval_llm"] = model

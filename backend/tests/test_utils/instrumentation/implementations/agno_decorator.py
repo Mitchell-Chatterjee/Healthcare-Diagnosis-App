@@ -1,18 +1,19 @@
 import functools
 from typing import List, Union, Optional
-from agno_test.agents.healthcare.test_utils.instrumentation.base.decorator_base import ConditionalInstrumentation
 from deepeval.tracing import observe, update_current_span
 from deepeval.test_case import LLMTestCase, ToolCall
 from deepeval.metrics import BaseMetric
 from agno.team.team import Team
 from agno.workflow.workflow import Workflow
 from agno.agent.agent import Agent
-from agno.run.response import RunResponse
-from agno.run.team import TeamRunResponse
-from agno.run.v2.workflow import WorkflowRunResponse
+from agno.run.workflow import WorkflowRunOutput
+from agno.run.agent import RunOutput
+from agno.run.team import TeamRunOutput
+
+from tests.test_utils.instrumentation.base.decorator_base import ConditionalInstrumentation
 
 AgnoInstance = Union[Agent, Team, Workflow]
-AgnoResponse = Union[RunResponse, WorkflowRunResponse, TeamRunResponse]
+AgnoResponse = Union[RunOutput, WorkflowRunOutput, TeamRunOutput]
 
 
 def create_test_case(instance: AgnoInstance, message: str, response: AgnoResponse) -> LLMTestCase:
@@ -23,12 +24,12 @@ def create_test_case(instance: AgnoInstance, message: str, response: AgnoRespons
     expected_tools = None
     if hasattr(response, "tools") and response.tools:
         tools_called = [ToolCall(name=tool.tool_name) for tool in response.tools]
-        expected_tools = instance.workflow_session_state.get("expected_tools_by_agent", {}).get(instance.__class__.__name__, None)
+        expected_tools = instance.session_state.get("expected_tools_by_agent", {}).get(instance.__class__.__name__, None)
 
     return LLMTestCase(
         input=message,
         actual_output=actual_output,
-        expected_output=instance.workflow_session_state.get("expected_output", None),
+        expected_output=instance.session_state.get("expected_output", None),
         retrieval_context=[actual_output], 
         tools_called=tools_called, 
         expected_tools=expected_tools

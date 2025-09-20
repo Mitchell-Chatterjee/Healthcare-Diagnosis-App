@@ -1,12 +1,13 @@
 from typing import List
 from functools import partial
 
-from agno_test.agents.healthcare.test_utils.utils.evaluation_utils import component_eval_enabled
 from deepeval.metrics import AnswerRelevancyMetric, ContextualRelevancyMetric
 from deepeval.test_case import LLMTestCaseParams
 from deepeval.metrics import GEval, BaseMetric
 from deepeval.metrics.g_eval import Rubric
-from agno_test.agents.healthcare.test_utils.utils.eval_model_config import EvalModelConfig
+
+from tests.test_utils.utils.eval_model_config import EvalModelConfig
+from tests.test_utils.utils.evaluation_utils import component_eval_enabled
 
 
 Correctness_metric = partial(

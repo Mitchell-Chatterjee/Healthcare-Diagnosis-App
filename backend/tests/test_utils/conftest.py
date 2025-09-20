@@ -1,7 +1,8 @@
 import os
 import pytest
-from agno_test.agents.healthcare.test_utils.utils.eval_model_config import EvalModelConfig
 from deepeval.models import AzureOpenAIModel
+
+from tests.test_utils.utils.eval_model_config import EvalModelConfig
 
 def pytest_configure(config):
     """Set up the model before test collection."""

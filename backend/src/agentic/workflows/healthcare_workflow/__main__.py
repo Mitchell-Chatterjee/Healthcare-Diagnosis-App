@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import asyncio
-from agno_test.agents.healthcare.workflows.healthcare_workflow import HealthcareWorkflow
+from src.agentic.workflows.healthcare_workflow.workflow import HealthcareWorkflow
 
 if __name__ == "__main__":
     workflow = HealthcareWorkflow()

@@ -1,9 +1,8 @@
 from agno.agent import Agent
-from agno.run.response import RunResponse
 from agno.tools.reasoning import ReasoningTools
-from agno_test.utils.models import mistral_small_32_online
-from .prompts import medical_test_agent_description, medical_test_agent_instructions
-from agno_test.agents.healthcare.tools.medical_test_tools import MedicalTestTools
+from src.common.models.models import LanguageModelFactory
+from src.agentic.agents.medical_test_agent.prompts import medical_test_agent_description, medical_test_agent_instructions
+from src.agentic.tools.medical_test_tools import MedicalTestTools
 
 from deepeval.test_case import ToolCall
 
@@ -36,7 +35,7 @@ class MedicalTestAgent(Agent):
         """
         super().__init__(
             name=name,
-            model=mistral_small_32_online(),
+            model=LanguageModelFactory.create_default_model(),
             tools=[
                 MedicalTestTools(),
                 ReasoningTools(add_instructions=True),

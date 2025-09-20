@@ -51,23 +51,122 @@ End-to-end AI-powered process orchestration:
 
 ### Prerequisites
 - Python 3.9+
-- pip or uv package manager
+- [uv](https://docs.astral.sh/uv/) (recommended) or pip
 
-### Installation
+### Setup Virtual Environment
+
+This project uses `uv` for fast Python package management. Follow these steps to set up and activate your environment:
+
+#### 1. Install uv (if not already installed)
 ```bash
-cd backend
-pip install -r requirements.txt
-# or
-uv install
+# On macOS and Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# On Windows
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# Or with pip
+pip install uv
 ```
 
-### Basic Usage
+#### 2. Create and activate virtual environment
+```bash
+# Navigate to the backend directory
+cd backend
+
+# Create virtual environment (if it doesn't exist)
+uv venv
+
+# Activate the virtual environment
+# On Linux/macOS:
+source .venv/bin/activate
+
+# On Windows:
+.venv\Scripts\activate
+```
+
+#### 3. Install dependencies
+```bash
+# Install all project dependencies
+uv install
+
+# Or install in development mode with all extras
+uv install --dev
+```
+
+#### 4. Verify installation
+```bash
+# Check that the environment is active (you should see (.venv) in your prompt)
+which python
+
+# Verify installed packages
+uv pip list
+```
+
+### Alternative: Using pip
+If you prefer using pip instead of uv:
+```bash
+cd backend
+python -m venv .venv
+
+# Activate
+source .venv/bin/activate  # Linux/macOS
+# or
+.venv\Scripts\activate     # Windows
+
+# Install dependencies
+pip install -e .
+```
+
+## 🏃‍♂️ Running the Application
+
+### Using uv run (Recommended)
+`uv run` automatically manages the virtual environment for you:
+
+```bash
+# Run individual agents
+uv run -m src.agentic.agents.diagnostic_agent
+uv run -m src.agentic.agents.symptom_extraction_agent
+uv run -m src.agentic.agents.medical_research_agent
+uv run -m src.agentic.agents.medical_test_agent
+
+# Run multi-agent teams
+uv run -m src.agentic.teams.research_testing_team
+
+# Run complete workflows
+uv run -m src.agentic.workflows.healthcare_workflow
+
+# Run demos and utilities
+uv run -m utils.simple_healthcare_workflow_demo
+```
+
+### Using activated virtual environment
+If you prefer to activate the environment manually:
+
+```bash
+# Activate environment
+source .venv/bin/activate
+
+# Run modules
+python -m src.agentic.agents.diagnostic_agent
+python -m src.agentic.workflows.healthcare_workflow
+python -m utils.simple_healthcare_workflow_demo
+```
+
+## 💻 Basic Usage Examples
+
+### Python API Usage
 ```python
-from backend.src import DiagnosticAgent, ResearchTestingTeam, HealthcareWorkflow
+from src.agentic.agents import DiagnosticAgent, SymptomExtractionAgent
+from src.agentic.teams import ResearchTestingTeam
+from src.agentic.workflows import HealthcareWorkflow
 
 # Use individual agents
-agent = DiagnosticAgent()
-result = agent.run("Patient has chest pain and shortness of breath")
+symptom_agent = SymptomExtractionAgent()
+symptoms = symptom_agent.run("Patient has chest pain and shortness of breath")
+
+diagnostic_agent = DiagnosticAgent()
+diagnosis = diagnostic_agent.run(symptoms)
 
 # Use coordinated teams  
 team = ResearchTestingTeam()
@@ -75,17 +174,7 @@ analysis = team.run("Investigate chest pain symptoms")
 
 # Use full workflow
 workflow = HealthcareWorkflow()
-diagnosis = workflow.run("Patient inquiry about chest pain")
-```
-
-### Running Demos
-```bash
-# Simple workflow demonstration
-python -m utils.simple_healthcare_workflow_demo
-
-# Individual agent testing
-python -m src.agents.diagnostic_agent
-python -m src.agents.medical_research_agent
+result = workflow.run("Patient inquiry about chest pain")
 ```
 
 ## 🔧 Development

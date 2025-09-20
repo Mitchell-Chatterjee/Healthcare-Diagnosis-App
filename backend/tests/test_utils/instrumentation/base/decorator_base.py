@@ -1,7 +1,9 @@
 """
 Base decorator class for DeepEval.
 """
-from agno_test.agents.healthcare.test_utils.utils.evaluation_utils import component_eval_enabled
+
+from tests.test_utils.utils.evaluation_utils import component_eval_enabled
+
 
 class ConditionalInstrumentation:
     """Utility for wrapping decorators with conditional logic."""

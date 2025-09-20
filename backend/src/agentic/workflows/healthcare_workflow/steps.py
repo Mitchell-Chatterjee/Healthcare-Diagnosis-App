@@ -1,7 +1,7 @@
-from agno.workflow.v2.step import Step
-from agno_test.agents.healthcare.agents.symptom_extraction_agent import SymptomExtractionAgent
-from agno_test.agents.healthcare.agents.diagnostic_agent import DiagnosticAgent
-from agno_test.agents.healthcare.teams.research_testing_team import ResearchTestingTeam
+from agno.workflow import Step
+from src.agentic.agents.symptom_extraction_agent.agent import SymptomExtractionAgent
+from src.agentic.agents.differential_diagnosis_agent.agent import DifferentialDiagnosisAgent
+from src.agentic.teams.research_testing_team.team import ResearchTestingTeam
 
 def create_symptom_extraction_step():
     """Create the symptom extraction step."""
@@ -21,7 +21,7 @@ def create_diagnostic_step():
     """Create the diagnostic step."""
     return Step(
         name="Diagnostic Step",
-        agent=DiagnosticAgent(name="Diagnostic Agent"),
+        agent=DifferentialDiagnosisAgent(name="Differential Diagnosis Agent"),
     )
 
 def get_workflow_steps():

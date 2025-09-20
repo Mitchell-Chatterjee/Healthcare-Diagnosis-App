@@ -81,7 +81,7 @@ uv install
 
 #### Individual Agents
 ```python
-from backend.src.agentic.agents import DiagnosticAgent, SymptomExtractionAgent
+from src.agentic.agents import DiagnosticAgent, SymptomExtractionAgent
 
 # Extract symptoms from patient inquiry
 symptom_agent = SymptomExtractionAgent()
@@ -94,7 +94,7 @@ diagnosis = diagnostic_agent.run(patient_data)
 
 #### Team Coordination
 ```python
-from backend.src.agentic.teams import ResearchTestingTeam
+from src.agentic.teams import ResearchTestingTeam
 
 # Use coordinated research and testing
 team = ResearchTestingTeam()
@@ -104,7 +104,7 @@ analysis = team.run("Investigate chest pain and breathing difficulty")
 
 #### Complete Workflows
 ```python
-from backend.src.agentic.workflows import HealthcareWorkflow
+from src.agentic.workflows import HealthcareWorkflow
 
 # Run complete diagnostic workflow
 workflow = HealthcareWorkflow()
@@ -161,114 +161,21 @@ backend/src/agentic/workflows/workflow_name/
 ├── __init__.py         # Package exports: Workflow class and functions
 ├── __main__.py         # Entry point for standalone execution
 ├── workflow.py         # Main workflow implementation
-├── steps.py            # Individual step functions
-├── config.py           # Workflow configuration
-├── schemas.py          # Workflow-specific data models
-└── tests/              # Unit tests for the workflow
-    ├── __init__.py
-    ├── test_workflow.py
-    └── test_schemas.py
-```
+# Healthcare Diagnosis App
 
-## 🛠️ Development
+Lightweight monorepo for research and development of an AI-assisted healthcare diagnosis system.
 
-### Running Tests
-```bash
-# Run all tests
-cd backend
-pytest
+This repository contains two main components:
 
-# Run specific component tests
-pytest src/agents/diagnostic_agent/tests/
-pytest src/teams/research_testing_team/tests/
-pytest src/agentic/workflows/healthcare_workflow/tests/
+- `backend/` — Python backend with AI agents, teams, and workflows. See `backend/README.md` for setup, virtual environment instructions, and developer docs.
+- `frontend/` — Streamlit frontend for interacting with the agents. See `frontend/README.md` for frontend setup and usage.
 
-# Run with coverage
-pytest --cov=src
-```
+Quick pointers
 
-### Code Quality
-```bash
-# Format code
-black backend/src/ backend/utils/ backend/tests/
+- Python: 3.9+
+- Backend virtualenv (recommended): `backend/uv` (see `backend/README.md` for activation commands)
+- For contribution and development workflows, follow the per-component READMEs.
 
-# Lint code  
-flake8 backend/src/ backend/utils/ backend/tests/
+For full project documentation, developer guides, and API details, open the component READMEs or the `docs/` directory.
 
-# Type checking
-mypy backend/src/
-```
-
-### Creating New Components
-
-Follow the established patterns in \`backend/src/\` for consistency:
-
-1. **Create Package Structure**: Use standard directory layout
-2. **Implement Core Logic**: Follow existing agent/team/workflow patterns
-3. **Add Schemas**: Define Pydantic models for inputs/outputs
-4. **Write Tests**: Include comprehensive test coverage
-5. **Update Exports**: Add to relevant \`__init__.py\` files
-
-## 🔧 Configuration
-
-### Environment Variables
-```bash
-# Model configuration
-HEALTHCARE_MODEL_PROVIDER=openai
-HEALTHCARE_API_KEY=your-api-key
-HEALTHCARE_MODEL_NAME=gpt-4
-
-# Logging
-HEALTHCARE_LOG_LEVEL=INFO
-```
-
-### Shared Configuration
-The \`shared/\` directory provides cross-component resources:
-- Common data schemas and models
-- Type definitions and constants
-- Base configuration classes
-- Shared utility functions
-
-## 🏥 Medical Safety Features
-
-- **Medical Disclaimers**: Automatic medical disclaimer requirements
-- **Confidence Scoring**: All diagnoses include confidence levels
-- **Emergency Detection**: Automatic detection of emergency symptoms
-- **Audit Trails**: Complete logging of medical decisions
-- **Professional Review**: Integration points for healthcare provider oversight
-
-## 📚 Documentation
-
-- [Backend README](backend/README.md) - Detailed backend documentation
-- [Shared Resources Guide](shared/README.md) - Cross-component resources
-- [SECURITY.md](SECURITY.md) - Security and compliance guidelines
-- [LICENSE](LICENSE) - License information
-
-## 🤝 Contributing
-
-1. Follow the established package structure patterns
-2. Add comprehensive tests for new components  
-3. Update documentation for public interfaces
-4. Ensure medical safety considerations are addressed
-5. Include proper error handling and logging
-
-## ⚖️ License & Compliance
-
-This project includes medical AI functionality and should be used in accordance with:
-- Healthcare regulations (HIPAA, GDPR, etc.)
-- Medical device standards where applicable  
-- AI ethics guidelines
-- Professional medical oversight requirements
-
-See [LICENSE](LICENSE) and [SECURITY.md](SECURITY.md) for details.
-
-## 🆘 Support
-
-For issues, questions, or contributions:
-- Open an issue on GitHub
-- Review the documentation in the \`docs/\` directory
-- Check the \`backend/README.md\` for technical details
-
----
-
-**Remember**: This system is for educational and assistance purposes only. Always consult qualified healthcare professionals for medical advice, diagnosis, and treatment decisions.
+License: MIT — see `LICENSE`.

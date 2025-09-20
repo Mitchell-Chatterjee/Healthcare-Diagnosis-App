@@ -1,11 +1,11 @@
 # Agent Classes
-from .diagnostic_agent import DiagnosticAgent
+from .differential_diagnosis_agent import DifferentialDiagnosisAgent, DiagnosticAgent
 from .medical_research_agent import MedicalResearchAgent
 from .medical_test_agent import MedicalTestAgent
 from .symptom_extraction_agent import SymptomExtractionAgent
 
 # Agent Schemas
-from .diagnostic_agent import DiagnosticRequest, DiagnosticResponse
+from .differential_diagnosis_agent import DifferentialDiagnosisRequest, DifferentialDiagnosisResponse
 from .medical_research_agent import MedicalResearchRequest, MedicalResearchResponse  
 from .medical_test_agent import MedicalTestRequest, MedicalTestResponse, TestResult
 from .symptom_extraction_agent import (
@@ -16,14 +16,15 @@ from .symptom_extraction_agent import (
 
 __all__ = [
     # Agents
+    "DifferentialDiagnosisAgent",
     "DiagnosticAgent",
     "MedicalResearchAgent", 
     "MedicalTestAgent",
     "SymptomExtractionAgent",
     
     # Schemas
-    "DiagnosticRequest",
-    "DiagnosticResponse",
+    "DifferentialDiagnosisRequest",
+    "DifferentialDiagnosisResponse",
     "MedicalResearchRequest",
     "MedicalResearchResponse",
     "MedicalTestRequest", 

@@ -1,7 +1,7 @@
 from agno.agent import Agent
 from agno.tools.reasoning import ReasoningTools
-from agno_test.utils.models import mistral_small_32_online
-from .prompts import symptom_extraction_agent_description, symptom_extraction_agent_instructions
+from src.common.models.models import LanguageModelFactory
+from src.agentic.agents.symptom_extraction_agent.prompts import symptom_extraction_agent_description, symptom_extraction_agent_instructions
 
 import asyncio
 
@@ -22,7 +22,7 @@ class SymptomExtractionAgent(Agent):
         """
         super().__init__(
             name=name,
-            model=mistral_small_32_online(),
+            model=LanguageModelFactory.create_default_model(),
             tools=None,
             description=symptom_extraction_agent_description,
             instructions=symptom_extraction_agent_instructions,

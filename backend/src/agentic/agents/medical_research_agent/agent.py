@@ -1,12 +1,13 @@
 from agno.agent import Agent
 from agno.tools.googlesearch import GoogleSearchTools
 from agno.tools.reasoning import ReasoningTools
-from agno_test.utils.models import mistral_small_32_online
-from .prompts import medical_research_agent_description, medical_research_agent_instructions
+from src.common.models.models import LanguageModelFactory
+from src.agentic.agents.medical_research_agent.prompts import medical_research_agent_description, medical_research_agent_instructions
 
-from deepeval.tracing import observe, update_current_span
-from deepeval.test_case import LLMTestCase
-from agno_test.agents.healthcare.test_utils.utils.eval_metrics import answer_relevancy_metrics
+# TODO: Fix test utils imports when test infrastructure is ready
+# from deepeval.tracing import observe, update_current_span
+# from deepeval.test_case import LLMTestCase
+# from src.tests.test_utils.utils.eval_metrics import answer_relevancy_metrics
 
 import asyncio
 
@@ -32,13 +33,12 @@ class MedicalResearchAgent(Agent):
         """
         super().__init__(
             name=name,
-            model=mistral_small_32_online(),
+            model=LanguageModelFactory.create_default_model(),
             tools=[
                 GoogleSearchTools(),
                 ReasoningTools(add_instructions=True),
             ],
             description=medical_research_agent_description,
             instructions=medical_research_agent_instructions,
-            show_tool_calls=True,
             **kwargs
         )

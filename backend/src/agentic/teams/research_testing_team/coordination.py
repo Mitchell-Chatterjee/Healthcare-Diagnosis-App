@@ -58,29 +58,3 @@ def get_team_instructions():
         Leave all diagnostic interpretation for the dedicated diagnostic agent in the next stage.
         Focus solely on providing comprehensive, accurate research and testing data with clear traceability back to the original inquiry.
     """)
-
-def setup_team_storage_and_memory():
-    """Setup storage and memory configurations for the team."""
-    from agno.storage.sqlite import SqliteStorage
-    from agno.memory.v2.db.sqlite import SqliteMemoryDb
-    from agno.memory.v2.memory import Memory
-    from agno_test.utils.models import mistral_small_32_online
-    
-    # Database file for Research Testing Team memory and storage
-    research_testing_db_file = "tmp/research_testing_team.db"
-    
-    storage = SqliteStorage(
-        table_name="research_testing_sessions", 
-        db_file=research_testing_db_file
-    )
-    
-    memory = Memory(
-        # Use any model for creating memories
-        model=mistral_small_32_online(),
-        db=SqliteMemoryDb(
-            table_name="research_testing_memories", 
-            db_file=research_testing_db_file
-        ),
-    )
-    
-    return storage, memory

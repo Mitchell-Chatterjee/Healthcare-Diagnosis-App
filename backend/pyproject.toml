@@ -28,6 +28,9 @@ dependencies = [
     "alembic>=1.11.0",
     "psycopg2-binary>=2.9.8",
     "deepeval==3.3.9",
+    "pydantic-settings>=2.10.1",
+    "googlesearch-python>=1.3.0",
+    "pycountry>=24.6.1",
 ]
 
 [project.urls]
@@ -68,4 +71,9 @@ markers = [
     "smoke: marks tests as smoke (deselect with '-m \"not smoke\"')",
     "unit: marks tests as unit",
     "regression: marks tests as regression",
+]
+
+[dependency-groups]
+dev = [
+    "pylint>=3.3.8",
 ]

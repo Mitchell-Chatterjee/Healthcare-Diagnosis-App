@@ -4,8 +4,9 @@ Base class for instrumented components using DeepEval.
 
 from abc import ABC, abstractmethod
 from typing import List
-from agno_test.agents.healthcare.test_utils.utils.evaluation_utils import component_eval_enabled
 from deepeval.metrics import BaseMetric
+
+from tests.test_utils.utils.evaluation_utils import component_eval_enabled
 
 
 class InstrumentedBase(ABC):

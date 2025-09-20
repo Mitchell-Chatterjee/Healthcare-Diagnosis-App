@@ -13,7 +13,7 @@ comprehensive healthcare assistance.
 """
 
 # Agents
-from .agents.diagnostic_agent import DiagnosticAgent
+from .agents.differential_diagnosis_agent import DifferentialDiagnosisAgent, DiagnosticAgent
 from .agents.medical_research_agent import MedicalResearchAgent  
 from .agents.medical_test_agent import MedicalTestAgent
 from .agents.symptom_extraction_agent import SymptomExtractionAgent
@@ -24,40 +24,35 @@ from .teams.research_testing_team import ResearchTestingTeam
 # Workflows
 from .workflows.healthcare_workflow import HealthcareWorkflow
 
-# Schemas
-from .agents.diagnostic_agent.schemas import (
-    DiagnosticRequest,
-    DiagnosticResponse,
-    DiagnosticAnalysis
+# Schemas - Only import what actually exists
+from .agents.differential_diagnosis_agent.schemas import (
+    DifferentialDiagnosisRequest,
+    DifferentialDiagnosisResponse
 )
 from .agents.medical_research_agent.schemas import (
-    ResearchRequest,
-    ResearchResponse,
-    ResearchEvidence
+    MedicalResearchRequest,
+    MedicalResearchResponse
 )
 from .agents.medical_test_agent.schemas import (
-    TestRequest,
-    TestResponse,
-    TestRecommendation
+    MedicalTestRequest,
+    MedicalTestResponse
 )
 from .agents.symptom_extraction_agent.schemas import (
     SymptomExtractionRequest,
-    SymptomExtractionResponse,
-    ExtractedSymptom
+    SymptomExtractionResponse
 )
 from .teams.research_testing_team.schemas import (
-    TeamRequest,
-    TeamResponse,
-    TeamAnalysis
+    ResearchTestingRequest,
+    ResearchTestingResponse
 )
 from .workflows.healthcare_workflow.schemas import (
-    WorkflowRequest,
-    WorkflowResponse,
-    WorkflowStep
+    HealthcareWorkflowRequest,
+    HealthcareWorkflowResponse
 )
 
 __all__ = [
     # Agents
+    "DifferentialDiagnosisAgent",
     "DiagnosticAgent",
     "MedicalResearchAgent",
     "MedicalTestAgent", 
@@ -70,26 +65,20 @@ __all__ = [
     "HealthcareWorkflow",
     
     # Agent Schemas
-    "DiagnosticRequest",
-    "DiagnosticResponse", 
-    "DiagnosticAnalysis",
-    "ResearchRequest",
-    "ResearchResponse",
-    "ResearchEvidence",
-    "TestRequest",
-    "TestResponse",
-    "TestRecommendation",
+    "DifferentialDiagnosisRequest",
+    "DifferentialDiagnosisResponse",
+    "MedicalResearchRequest",
+    "MedicalResearchResponse",
+    "MedicalTestRequest",
+    "MedicalTestResponse",
     "SymptomExtractionRequest",
     "SymptomExtractionResponse",
-    "ExtractedSymptom",
     
     # Team Schemas
-    "TeamRequest",
-    "TeamResponse",
-    "TeamAnalysis",
+    "ResearchTestingRequest",
+    "ResearchTestingResponse",
     
     # Workflow Schemas
-    "WorkflowRequest",
-    "WorkflowResponse",
-    "WorkflowStep",
+    "HealthcareWorkflowRequest",
+    "HealthcareWorkflowResponse",
 ]

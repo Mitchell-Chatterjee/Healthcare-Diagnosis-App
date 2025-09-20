@@ -1,5 +1,5 @@
 import pytest
-from backend.agents.medical_research_agent.schemas import MedicalResearchRequest, MedicalResearchResponse
+from backend.src.agentic.agents.medical_research_agent.schemas import MedicalResearchRequest, MedicalResearchResponse
 
 
 class TestMedicalResearchSchemas:

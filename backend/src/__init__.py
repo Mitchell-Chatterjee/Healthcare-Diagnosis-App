@@ -1,14 +1,12 @@
-# Agents
-from .agents.diagnostic_agent import DiagnosticAgent
-from .agents.medical_research_agent import MedicalResearchAgent
-from .agents.medical_test_agent import MedicalTestAgent
-from .agents.symptom_extraction_agent import SymptomExtractionAgent
-
-# Teams
-from .teams.research_testing_team import ResearchTestingTeam
-
-# Workflows
-from .workflows.healthcare_workflow import HealthcareWorkflow
+# Agentic AI Components
+from .agentic import (
+    DiagnosticAgent,
+    MedicalResearchAgent,
+    MedicalTestAgent,
+    SymptomExtractionAgent,
+    ResearchTestingTeam,
+    HealthcareWorkflow
+)
 
 # Common utilities
 from .common import (

@@ -14,13 +14,14 @@ This is a **monorepo** organized into focused directories:
 Healthcare-Diagnosis-App/
 ├── backend/                   # Python backend with AI agents & workflows
 │   ├── src/                  # All source code
-│   │   ├── agents/          # Individual AI healthcare agents
-│   │   ├── teams/           # Multi-agent collaboration teams
-│   │   ├── workflows/       # End-to-end diagnostic workflows
+│   │   ├── agentic/         # 🧠 All AI/LLM-powered components
+│   │   │   ├── agents/      # Individual AI healthcare agents
+│   │   │   ├── teams/       # Multi-agent collaboration teams
+│   │   │   ├── workflows/   # AI-powered diagnostic workflows
+│   │   │   └── tools/       # Agent-specific tools & integrations
 │   │   ├── api/             # REST API endpoints
 │   │   ├── services/        # Business logic layer
-│   │   ├── common/          # Shared utilities & configuration
-│   │   └── tools/           # Custom medical tools & integrations
+│   │   └── common/          # Shared utilities & configuration
 │   ├── utils/               # Development utilities & demos
 │   └── tests/               # Test infrastructure & shared fixtures
 ├── shared/                   # Cross-component resources
@@ -37,7 +38,9 @@ Healthcare-Diagnosis-App/
 
 ## 🤖 Healthcare AI System
 
-### Core Agents (`backend/src/agents/`)
+The AI components are organized under `backend/src/agentic/` for clear separation between intelligent AI functionality and traditional backend services.
+
+### Core Agents (`backend/src/agentic/agents/`)
 Specialized AI agents for medical tasks:
 
 - **SymptomExtractionAgent**: Extracts and structures symptoms from patient inquiries
@@ -45,13 +48,13 @@ Specialized AI agents for medical tasks:
 - **MedicalTestAgent**: Coordinates and executes diagnostic tests
 - **DiagnosticAgent**: Provides diagnostic analysis based on symptoms and test results
 
-### Collaborative Teams (`backend/src/teams/`)
+### Collaborative Teams (`backend/src/agentic/teams/`)
 Multi-agent coordination for complex medical analysis:
 
 - **ResearchTestingTeam**: Coordinates research and testing agents for comprehensive medical evaluation
 
-### Complete Workflows (`backend/src/workflows/`)
-End-to-end diagnostic processes:
+### Complete Workflows (`backend/src/agentic/workflows/`)
+End-to-end AI-powered diagnostic processes:
 
 - **HealthcareWorkflow**: Complete diagnostic workflow from symptom intake to final diagnosis with research and testing phases
 
@@ -78,7 +81,7 @@ uv install
 
 #### Individual Agents
 ```python
-from backend.src.agents import DiagnosticAgent, SymptomExtractionAgent
+from backend.src.agentic.agents import DiagnosticAgent, SymptomExtractionAgent
 
 # Extract symptoms from patient inquiry
 symptom_agent = SymptomExtractionAgent()
@@ -91,7 +94,7 @@ diagnosis = diagnostic_agent.run(patient_data)
 
 #### Team Coordination
 ```python
-from backend.src.teams import ResearchTestingTeam
+from backend.src.agentic.teams import ResearchTestingTeam
 
 # Use coordinated research and testing
 team = ResearchTestingTeam()
@@ -99,13 +102,13 @@ analysis = team.run("Investigate chest pain and breathing difficulty")
 ```
 
 
-#### Complete Workflow
+#### Complete Workflows
 ```python
-from backend.src.workflows import HealthcareWorkflow
+from backend.src.agentic.workflows import HealthcareWorkflow
 
 # Run complete diagnostic workflow
 workflow = HealthcareWorkflow()
-result = workflow.run("Patient inquiry about chest pain")
+result = workflow.run(patient_inquiry)
 ```
 
 ### Running Demos
@@ -154,7 +157,7 @@ backend/src/teams/team_name/
 
 ### Workflow Package Structure
 ```
-backend/src/workflows/workflow_name/
+backend/src/agentic/workflows/workflow_name/
 ├── __init__.py         # Package exports: Workflow class and functions
 ├── __main__.py         # Entry point for standalone execution
 ├── workflow.py         # Main workflow implementation
@@ -178,7 +181,7 @@ pytest
 # Run specific component tests
 pytest src/agents/diagnostic_agent/tests/
 pytest src/teams/research_testing_team/tests/
-pytest src/workflows/healthcare_workflow/tests/
+pytest src/agentic/workflows/healthcare_workflow/tests/
 
 # Run with coverage
 pytest --cov=src

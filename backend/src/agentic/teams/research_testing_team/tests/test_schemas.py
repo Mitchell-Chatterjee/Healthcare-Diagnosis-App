@@ -1,5 +1,5 @@
 import pytest
-from backend.teams.research_testing_team.schemas import (
+from backend.src.agentic.teams.research_testing_team.schemas import (
     ResearchTestingRequest,
     ResearchTestingResponse,
     ResearchPhaseResult,

@@ -1,5 +1,5 @@
 import pytest
-from backend.workflows.healthcare_workflow.schemas import (
+from backend.src.agentic.workflows.healthcare_workflow.schemas import (
     HealthcareWorkflowRequest,
     HealthcareWorkflowResponse,
     WorkflowStepResult

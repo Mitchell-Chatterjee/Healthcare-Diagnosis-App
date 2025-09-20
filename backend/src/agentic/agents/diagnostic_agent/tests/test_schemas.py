@@ -1,5 +1,5 @@
 import pytest
-from backend.agents.diagnostic_agent.schemas import DiagnosticRequest, DiagnosticResponse
+from backend.src.agentic.agents.diagnostic_agent.schemas import DiagnosticRequest, DiagnosticResponse
 
 
 class TestDiagnosticSchemas:

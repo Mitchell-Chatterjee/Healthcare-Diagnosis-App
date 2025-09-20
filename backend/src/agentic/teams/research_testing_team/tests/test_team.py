@@ -1,5 +1,5 @@
 import pytest
-from agno_test.agents.healthcare.teams.research_testing_team import ResearchTestingTeam
+from backend.src.agentic.teams.research_testing_team import ResearchTestingTeam
 
 
 class TestResearchTestingTeam:

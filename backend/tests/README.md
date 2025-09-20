@@ -21,7 +21,7 @@ tests/
 Individual component tests are located within each package:
 - `src/agents/*/tests/` - Agent-specific tests
 - `src/teams/*/tests/` - Team-specific tests  
-- `src/workflows/*/tests/` - Workflow-specific tests
+- `src/agentic/workflows/*/tests/` - Workflow-specific tests
 
 ### Integration Tests
 Cross-component integration tests are in this directory:

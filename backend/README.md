@@ -4,37 +4,47 @@ The backend for the Healthcare Diagnosis App, built with Python and the Agno fra
 
 ## 🏗️ Architecture
 
-The backend follows a clean, modular architecture with three main directories:
+The backend follows a clean, modular architecture with separation between AI/agentic components and traditional backend services:
 
 ```
 backend/
 ├── src/                    # All source code
-│   ├── agents/            # Individual AI agents
-│   ├── teams/             # Multi-agent teams  
-│   ├── workflows/         # Orchestration workflows
+│   ├── agentic/           # All AI/LLM-powered components
+│   │   ├── agents/        # Individual AI agents
+│   │   ├── teams/         # Multi-agent teams  
+│   │   ├── workflows/     # AI-powered workflows
+│   │   └── tools/         # Agent-specific tools
 │   ├── api/               # REST API endpoints
 │   ├── services/          # Business logic services
-│   ├── common/            # Shared utilities & config
-│   └── tools/             # Custom tools & integrations
+│   └── common/            # Shared utilities & config
 ├── utils/                 # Development utilities & demos
 └── tests/                 # Test infrastructure & shared fixtures
 ```
 
-## 🤖 Core Components
+### � Agentic AI Architecture
 
-### Agents (`src/agents/`)
+The `agentic/` directory contains all AI/LLM-powered components, providing clear separation between traditional backend services and intelligent AI functionality:
+
+- **Clear Separation of Concerns**: AI components are grouped separately from traditional web services
+- **Scalable AI Architecture**: Easy to extend with new agents, teams, and workflows
+- **Maintainable Codebase**: AI-specific logic is contained and organized
+- **Deployment Flexibility**: Agentic components could be deployed separately if needed
+
+## 🤖 Agentic Components
+
+### Agents (`src/agentic/agents/`)
 Specialized AI agents for specific healthcare tasks:
 - **DiagnosticAgent**: Provides diagnostic analysis based on symptoms and test results
 - **MedicalResearchAgent**: Conducts medical research using search capabilities  
 - **MedicalTestAgent**: Coordinates and executes medical diagnostic tests
 - **SymptomExtractionAgent**: Extracts and structures symptoms from patient inquiries
 
-### Teams (`src/teams/`)
+### Teams (`src/agentic/teams/`)
 Multi-agent collaboration systems:
 - **ResearchTestingTeam**: Coordinates research and testing agents for comprehensive medical analysis
 
-### Workflows (`src/workflows/`)  
-End-to-end process orchestration:
+### Workflows (`src/agentic/workflows/`)  
+End-to-end AI-powered process orchestration:
 - **HealthcareWorkflow**: Complete diagnostic workflow from symptom intake to final diagnosis
 
 ## 🚀 Quick Start
@@ -127,9 +137,9 @@ workflows/workflow_name/
 pytest
 
 # Run specific component tests
-pytest src/agents/diagnostic_agent/tests/
-pytest src/teams/research_testing_team/tests/
-pytest src/workflows/healthcare_workflow/tests/
+pytest src/agentic/agents/diagnostic_agent/tests/
+pytest src/agentic/teams/research_testing_team/tests/
+pytest src/agentic/workflows/healthcare_workflow/tests/
 
 # Run with coverage
 pytest --cov=src
@@ -184,7 +194,7 @@ LOG_LEVEL=INFO
 
 ### Configuration Files
 - `src/common/config/healthcare_config.py` - Main configuration
-- `src/workflows/healthcare_workflow/config.py` - Workflow settings
+- `src/agentic/workflows/healthcare_workflow/config.py` - Workflow settings
 - `tests/conftest.py` - Test configuration
 
 ## 🔍 Monitoring & Observability

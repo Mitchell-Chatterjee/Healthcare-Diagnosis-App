@@ -1,5 +1,5 @@
 import pytest
-from backend.agents.symptom_extraction_agent.schemas import (
+from backend.src.agentic.agents.symptom_extraction_agent.schemas import (
     SymptomExtractionRequest, 
     SymptomExtractionResponse, 
     ExtractedSymptom

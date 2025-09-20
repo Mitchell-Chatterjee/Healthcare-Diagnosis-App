@@ -42,14 +42,28 @@ Shared testing infrastructure and utilities:
 # Run all tests
 pytest
 
-# Run specific test category
-pytest tests/integration/
+# Run unit tests (marker)
+pytest -m unit backend/src
+
+# Run smoke tests (marker)
+pytest -m smoke backend/src
+
+# Run regression tests (marker)
+pytest -m regression backend/src
+
+# Run a specific tests directory
+pytest backend/tests
 
 # Run with coverage
-pytest --cov=src
+pytest --cov=backend/src
 
-# Run performance tests
-pytest tests/performance/
+# Build backend wheel (will use repo-level version.yaml via hatch dynamic versioning)
+cd ../backend
+hatch build
+
+# Verify version configuration (project-level source of truth)
+cd ..
+python scripts/verify_version.py
 ```
 
 ## 📊 Test Data

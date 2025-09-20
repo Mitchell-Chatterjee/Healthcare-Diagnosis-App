@@ -1,0 +1,71 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "healthcare-diagnosis-backend"
+dynamic = ["version"]
+description = "Backend package for Healthcare Diagnosis App (scoped project)"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    {name = "Mitchell Chatterjee", email = "mitchell@example.com"},
+]
+
+dependencies = [
+    "agno>=0.2.0",
+    "pydantic>=2.6.0",
+    "fastapi>=0.103.0",
+    "uvicorn>=0.23.0",
+    "python-multipart>=0.0.6",
+    "aiofiles>=23.1.0",
+    "python-jose[cryptography]>=3.3.0",
+    "passlib[bcrypt]>=1.8.0",
+    "httpx>=0.24.1",
+    "redis>=4.7.0",
+    "sqlalchemy>=2.1.0",
+    "alembic>=1.11.0",
+    "psycopg2-binary>=2.9.8",
+    "deepeval==3.3.9",
+]
+
+[project.urls]
+Homepage = "https://github.com/Mitchell-Chatterjee/Healthcare-Diagnosis-App"
+Repository = "https://github.com/Mitchell-Chatterjee/Healthcare-Diagnosis-App.git"
+Issues = "https://github.com/Mitchell-Chatterjee/Healthcare-Diagnosis-App/issues"
+
+[project.scripts]
+healthcare-workflow = "backend.src.workflows.healthcare_workflow.__main__:main"
+healthcare-demo = "backend.utils.simple_healthcare_workflow_demo:main"
+
+[tool.hatch.build.targets.wheel]
+where = ["backend", "backend/src", "backend/src/agentic", "backend/tests", "backend/utils"]
+
+[tool.black]
+line-length = 100
+
+[tool.hatch.version]
+path = "../version.yaml"
+type = "file"
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = [
+    "backend/src",
+    "backend/tests",
+]
+python_files = [
+    "test_*.py",
+    "*_test.py",
+]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--verbose",
+]
+markers = [
+    "smoke: marks tests as smoke (deselect with '-m \"not smoke\"')",
+    "unit: marks tests as unit",
+    "regression: marks tests as regression",
+]

@@ -28,5 +28,7 @@ class HealthcareWorkflow(Workflow):
                 Step(name="Differential Diagnosis Step", agent=DifferentialDiagnosisAgent()),
                 Step(name="Research and Testing Step", team=ResearchTestingTeam()),
                 Step(name="Final Diagnosis Step", agent=FinalDiagnosisAgent()),
-            ]
+            ],
+            stream_intermediate_steps=True,
+            stream=True,
         )

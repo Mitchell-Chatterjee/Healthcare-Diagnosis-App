@@ -2,7 +2,7 @@ from agno.agent import Agent
 from agno.tools.reasoning import ReasoningTools
 from src.common.models.models import LanguageModelFactory
 from src.agentic.agents.medical_test_agent.prompts import medical_test_agent_description, medical_test_agent_instructions
-from src.agentic.tools.medical_test_tools import MedicalTestTools
+from backend.src.agentic.agents.medical_test_agent.tools.medical_test_tools import MedicalTestTools
 
 from deepeval.test_case import ToolCall
 
@@ -42,6 +42,5 @@ class MedicalTestAgent(Agent):
             ],
             description=medical_test_agent_description,
             instructions=medical_test_agent_instructions,
-            show_tool_calls=True,
             **kwargs
         )

@@ -16,7 +16,7 @@ comprehensive healthcare assistance.
 from .agents.differential_diagnosis_agent import DifferentialDiagnosisAgent, DiagnosticAgent
 from .agents.medical_research_agent import MedicalResearchAgent  
 from .agents.medical_test_agent import MedicalTestAgent
-from .agents.symptom_extraction_agent import SymptomExtractionAgent
+from .agents.final_diagnosis_agent import FinalDiagnosisAgent
 
 # Teams
 from .teams.research_testing_team import ResearchTestingTeam
@@ -37,9 +37,13 @@ from .agents.medical_test_agent.schemas import (
     MedicalTestRequest,
     MedicalTestResponse
 )
-from .agents.symptom_extraction_agent.schemas import (
-    SymptomExtractionRequest,
-    SymptomExtractionResponse
+from .agents.final_diagnosis_agent.schemas import (
+    FinalDiagnosisRequest,
+    FinalDiagnosisResponse,
+    ConfidenceLevel,
+    DiagnosisStatus,
+    TreatmentRecommendation,
+    FollowUpPlan
 )
 from .teams.research_testing_team.schemas import (
     ResearchTestingRequest,
@@ -56,7 +60,7 @@ __all__ = [
     "DiagnosticAgent",
     "MedicalResearchAgent",
     "MedicalTestAgent", 
-    "SymptomExtractionAgent",
+    "FinalDiagnosisAgent",
     
     # Teams
     "ResearchTestingTeam",

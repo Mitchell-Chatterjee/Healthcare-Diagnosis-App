@@ -30,6 +30,7 @@ class ResearchTestingTeam(Team):
         super().__init__(
             name="Research Testing Team",
             description="A team that coordinates research and testing agents to handle complex medical inquiries.",
+            instructions=get_team_instructions(),
             mode=roles["coordination_mode"],
             team_id="research_testing_team",
             model=LanguageModelFactory.create_default_model(),
@@ -37,17 +38,10 @@ class ResearchTestingTeam(Team):
                 MedicalResearchAgent(name="Medical Research Agent"),
                 MedicalTestAgent(name="Healthcare Test Agent")
             ],
-            instructions=get_team_instructions(),
-            show_tool_calls=True,
-            show_members_responses=True,
-            storage=storage,
-            add_history_to_messages=True,
-            enable_user_memories=True,
-            memory=memory,
+            output_schema=None,  # Define if there's a specific output schema
             **kwargs
         )
     
     @classmethod
     def observability_metrics(cls):
-        # TODO: Implement metrics when test infrastructure is ready
         return []

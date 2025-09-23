@@ -2,35 +2,47 @@
 from .differential_diagnosis_agent import DifferentialDiagnosisAgent, DiagnosticAgent
 from .medical_research_agent import MedicalResearchAgent
 from .medical_test_agent import MedicalTestAgent
-from .symptom_extraction_agent import SymptomExtractionAgent
+from .final_diagnosis_agent import FinalDiagnosisAgent
 
 # Agent Schemas
 from .differential_diagnosis_agent import DifferentialDiagnosisRequest, DifferentialDiagnosisResponse
 from .medical_research_agent import MedicalResearchRequest, MedicalResearchResponse  
 from .medical_test_agent import MedicalTestRequest, MedicalTestResponse, TestResult
-from .symptom_extraction_agent import (
-    SymptomExtractionRequest, 
-    SymptomExtractionResponse, 
-    ExtractedSymptom
+from .final_diagnosis_agent import (
+    FinalDiagnosisRequest,
+    FinalDiagnosisResponse, 
+    ConfidenceLevel, 
+    DiagnosisStatus, 
+    TreatmentRecommendation, 
+    FollowUpPlan
 )
 
 __all__ = [
     # Agents
     "DifferentialDiagnosisAgent",
-    "DiagnosticAgent",
-    "MedicalResearchAgent", 
+    "FinalDiagnosisAgent",
+    "MedicalResearchAgent",
     "MedicalTestAgent",
-    "SymptomExtractionAgent",
+    "DiagnosticAgent",
     
-    # Schemas
+    # Schemas - Differential Diagnosis
     "DifferentialDiagnosisRequest",
     "DifferentialDiagnosisResponse",
-    "MedicalResearchRequest",
+    
+    # Schemas - Medical Research
+    "MedicalResearchRequest", 
     "MedicalResearchResponse",
-    "MedicalTestRequest", 
-    "MedicalTestResponse",
+    
+    # Schemas - Medical Test
+    "MedicalTestRequest",
+    "MedicalTestResponse", 
     "TestResult",
-    "SymptomExtractionRequest",
-    "SymptomExtractionResponse", 
-    "ExtractedSymptom"
+    
+    # Schemas - Final Diagnosis
+    "FinalDiagnosisRequest",
+    "FinalDiagnosisResponse",
+    "ConfidenceLevel",
+    "DiagnosisStatus", 
+    "TreatmentRecommendation",
+    "FollowUpPlan",
 ]

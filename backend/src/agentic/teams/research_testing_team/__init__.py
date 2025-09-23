@@ -1,15 +1,15 @@
 from .team import ResearchTestingTeam
 from .schemas import (
-    ResearchTestingRequest, 
-    ResearchTestingResponse, 
-    ResearchPhaseResult, 
-    TestingPhaseResult
+    ResearchTestingRequest,
+    ResearchTestingResponse,
+    ResearchFinding,
+    TestResult
 )
 
 __all__ = [
-    "ResearchTestingTeam", 
+    "ResearchTestingTeam",
     "ResearchTestingRequest", 
-    "ResearchTestingResponse", 
-    "ResearchPhaseResult", 
-    "TestingPhaseResult"
+    "ResearchTestingResponse",
+    "ResearchFinding",
+    "TestResult"
 ]

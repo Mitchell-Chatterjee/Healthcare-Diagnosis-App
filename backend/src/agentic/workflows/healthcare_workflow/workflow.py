@@ -1,8 +1,8 @@
 from agno.workflow import Workflow, Step
 
-from backend.src.agentic.agents.differential_diagnosis_agent.agent import DifferentialDiagnosisAgent
-from backend.src.agentic.agents.final_diagnosis_agent.agent import FinalDiagnosisAgent
-from backend.src.agentic.teams.research_testing_team.team import ResearchTestingTeam
+from src.agentic.agents.differential_diagnosis_agent.agent import DifferentialDiagnosisAgent
+from src.agentic.agents.final_diagnosis_agent.agent import FinalDiagnosisAgent
+from src.agentic.teams.research_testing_team.team import ResearchTestingTeam
 
 
 class HealthcareWorkflow(Workflow):
@@ -24,7 +24,6 @@ class HealthcareWorkflow(Workflow):
         super().__init__(
             name="Healthcare Workflow",
             description="A comprehensive workflow for educational medical analysis",
-            storage=use_storage,
             steps=[
                 Step(name="Differential Diagnosis Step", agent=DifferentialDiagnosisAgent()),
                 Step(name="Research and Testing Step", team=ResearchTestingTeam()),

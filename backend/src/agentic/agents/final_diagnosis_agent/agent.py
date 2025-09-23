@@ -2,7 +2,7 @@ from agno.agent import Agent
 from agno.tools.reasoning import ReasoningTools
 from src.common.models.models import LanguageModelFactory
 from src.agentic.agents.final_diagnosis_agent.prompts import final_diagnosis_agent_description, final_diagnosis_agent_instructions
-from src.agentic.agents.final_diagnosis_agent.schemas import FinalDiagnosisResponse
+from src.agentic.agents.final_diagnosis_agent.schemas import FinalDiagnosisRequest, FinalDiagnosisResponse
 
 import asyncio
 
@@ -35,6 +35,7 @@ class FinalDiagnosisAgent(Agent):
             tools=[ReasoningTools],
             description=final_diagnosis_agent_description,
             instructions=final_diagnosis_agent_instructions,
+            input_schema=FinalDiagnosisRequest,
             output_schema=FinalDiagnosisResponse,
             **kwargs
         )

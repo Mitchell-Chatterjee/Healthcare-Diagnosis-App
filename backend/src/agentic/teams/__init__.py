@@ -3,10 +3,7 @@ from .research_testing_team import ResearchTestingTeam
 
 # Team Schemas
 from .research_testing_team import (
-    ResearchTestingRequest,
-    ResearchTestingResponse,
-    ResearchPhaseResult,
-    TestingPhaseResult
+    ResearchTestingResponse
 )
 
 __all__ = [
@@ -14,8 +11,7 @@ __all__ = [
     "ResearchTestingTeam",
     
     # Schemas
-    "ResearchTestingRequest",
-    "ResearchTestingResponse", 
-    "ResearchPhaseResult",
-    "TestingPhaseResult"
+    "ResearchTestingResponse",
+    "ResearchFinding",
+    "TestResult"
 ]

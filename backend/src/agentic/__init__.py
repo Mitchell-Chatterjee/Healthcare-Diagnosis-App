@@ -37,16 +37,7 @@ from .agents.medical_test_agent.schemas import (
     MedicalTestRequest,
     MedicalTestResponse
 )
-from .agents.final_diagnosis_agent.schemas import (
-    FinalDiagnosisRequest,
-    FinalDiagnosisResponse,
-    ConfidenceLevel,
-    DiagnosisStatus,
-    TreatmentRecommendation,
-    FollowUpPlan
-)
 from .teams.research_testing_team.schemas import (
-    ResearchTestingRequest,
     ResearchTestingResponse
 )
 from .workflows.healthcare_workflow.schemas import (
@@ -79,7 +70,6 @@ __all__ = [
     "SymptomExtractionResponse",
     
     # Team Schemas
-    "ResearchTestingRequest",
     "ResearchTestingResponse",
     
     # Workflow Schemas

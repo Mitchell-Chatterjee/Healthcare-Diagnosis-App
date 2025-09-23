@@ -10,11 +10,7 @@ from .medical_research_agent import MedicalResearchRequest, MedicalResearchRespo
 from .medical_test_agent import MedicalTestRequest, MedicalTestResponse, TestResult
 from .final_diagnosis_agent import (
     FinalDiagnosisRequest,
-    FinalDiagnosisResponse, 
-    ConfidenceLevel, 
-    DiagnosisStatus, 
-    TreatmentRecommendation, 
-    FollowUpPlan
+    FinalDiagnosisResponse
 )
 
 __all__ = [
@@ -40,9 +36,5 @@ __all__ = [
     
     # Schemas - Final Diagnosis
     "FinalDiagnosisRequest",
-    "FinalDiagnosisResponse",
-    "ConfidenceLevel",
-    "DiagnosisStatus", 
-    "TreatmentRecommendation",
-    "FollowUpPlan",
+    "FinalDiagnosisResponse"
 ]

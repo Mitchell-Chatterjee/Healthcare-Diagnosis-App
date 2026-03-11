@@ -12,7 +12,6 @@ from src.agentic.teams.research_testing_team.schemas import (
     ResearchTestingRequest,
     ResearchTestingResponse
 )
-from src.agentic.agents.differential_diagnosis_agent.schemas import DifferentialDiagnosisResponse
 
 
 class ResearchTestingTeam(Team):
@@ -43,9 +42,8 @@ class ResearchTestingTeam(Team):
                     role="Orders and executes diagnostic tests based on clinical recommendations"
                 )
             ],
-            input_schema=ResearchTestingRequest,
-            output_schema=ResearchTestingResponse,
             show_members_responses=True,
+            delegate_task_to_all_members=True,
             markdown=True,
             **kwargs
         )

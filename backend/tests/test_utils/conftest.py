@@ -1,5 +1,14 @@
 import os
+import sys
 import pytest
+from pathlib import Path
+
+# Ensure backend root is on sys.path so 'tests.*' and 'src.*' imports resolve
+# regardless of which directory deepeval test run is invoked from
+_backend_root = Path(__file__).parent.parent.parent
+if str(_backend_root) not in sys.path:
+    sys.path.insert(0, str(_backend_root))
+
 from deepeval.models import AzureOpenAIModel
 
 from tests.test_utils.utils.eval_model_config import EvalModelConfig

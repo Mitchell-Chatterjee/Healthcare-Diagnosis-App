@@ -3,9 +3,11 @@ from agno.workflow import Workflow, Step
 from src.agentic.agents.differential_diagnosis_agent.agent import DifferentialDiagnosisAgent
 from src.agentic.agents.final_diagnosis_agent.agent import FinalDiagnosisAgent
 from src.agentic.teams.research_testing_team.team import ResearchTestingTeam
+from tests.test_utils.instrumentation.implementations.agno_inheritance import InstrumentedWorkflow
+from tests.test_utils.utils.eval_metrics import answer_relevancy_metrics
 
 
-class HealthcareWorkflow(Workflow):
+class HealthcareWorkflow(InstrumentedWorkflow):
     """A workflow that orchestrates healthcare agents for comprehensive medical analysis.
     
     Workflow Steps:
@@ -30,5 +32,9 @@ class HealthcareWorkflow(Workflow):
                 Step(name="Final Diagnosis Step", agent=FinalDiagnosisAgent()),
             ],
             stream_intermediate_steps=True,
-            stream=True,
+            stream=False,
         )
+
+    @classmethod
+    def observability_metrics(cls):
+        return answer_relevancy_metrics()

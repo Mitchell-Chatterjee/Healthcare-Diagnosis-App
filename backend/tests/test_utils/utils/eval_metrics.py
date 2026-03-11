@@ -1,7 +1,7 @@
 from typing import List
 from functools import partial
 
-from deepeval.metrics import AnswerRelevancyMetric, ContextualRelevancyMetric
+from deepeval.metrics import AnswerRelevancyMetric, ContextualRelevancyMetric, ToolCorrectnessMetric
 from deepeval.test_case import LLMTestCaseParams
 from deepeval.metrics import GEval, BaseMetric
 from deepeval.metrics.g_eval import Rubric
@@ -55,6 +55,12 @@ def correctness_metrics(threshold: float = 0.0) -> List[GEval]:
         model = EvalModelConfig.get_model()
         return [Correctness_metric(model=model, threshold=threshold)]
     return []  
+
+def tool_correctness_metrics(threshold: float = 0.0) -> List[ToolCorrectnessMetric]:
+    """Return ToolCorrectnessMetric list only when eval is enabled; else empty list."""
+    if component_eval_enabled():
+        return [ToolCorrectnessMetric(threshold=threshold)]
+    return []
 
 def combine_metrics(metrics: List[List[BaseMetric]]) -> List[BaseMetric]:
     """Combine multiple lists of metrics into a single list."""

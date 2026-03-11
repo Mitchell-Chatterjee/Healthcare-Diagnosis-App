@@ -1,11 +1,11 @@
-from agno.agent import Agent
-from agno.tools.reasoning import ReasoningTools
 from src.agentic.agents.differential_diagnosis_agent.schemas import DifferentialDiagnosisResponse
 from src.common.models.models import LanguageModelFactory
 from src.agentic.agents.differential_diagnosis_agent.prompts import differential_diagnosis_agent_description, differential_diagnosis_agent_instructions
+from tests.test_utils.instrumentation.implementations.agno_inheritance import InstrumentedAgent
+from tests.test_utils.utils.eval_metrics import answer_relevancy_metrics
 
 
-class DifferentialDiagnosisAgent(Agent):
+class DifferentialDiagnosisAgent(InstrumentedAgent):
     """
     Agent specialized in performing differential diagnosis following clinical methodology.
     
@@ -35,8 +35,11 @@ class DifferentialDiagnosisAgent(Agent):
             name=name,
             description=differential_diagnosis_agent_description,
             instructions=differential_diagnosis_agent_instructions,
-            tools=[ReasoningTools],
             model=LanguageModelFactory.create_default_model(),
             output_schema=DifferentialDiagnosisResponse,
             **kwargs
         )
+
+    @classmethod
+    def observability_metrics(cls):
+        return answer_relevancy_metrics()

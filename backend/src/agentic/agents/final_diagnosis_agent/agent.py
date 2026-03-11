@@ -1,13 +1,11 @@
-from agno.agent import Agent
-from agno.tools.reasoning import ReasoningTools
 from src.common.models.models import LanguageModelFactory
 from src.agentic.agents.final_diagnosis_agent.prompts import final_diagnosis_agent_description, final_diagnosis_agent_instructions
 from src.agentic.agents.final_diagnosis_agent.schemas import FinalDiagnosisRequest, FinalDiagnosisResponse
+from tests.test_utils.instrumentation.implementations.agno_inheritance import InstrumentedAgent
+from tests.test_utils.utils.eval_metrics import correctness_metrics
 
-import asyncio
 
-
-class FinalDiagnosisAgent(Agent):
+class FinalDiagnosisAgent(InstrumentedAgent):
     """
     Agent specialized in providing final diagnosis by synthesizing information from all previous workflow steps.
     
@@ -32,10 +30,12 @@ class FinalDiagnosisAgent(Agent):
         super().__init__(
             name=name,
             model=LanguageModelFactory.create_default_model(),
-            tools=[ReasoningTools],
             description=final_diagnosis_agent_description,
             instructions=final_diagnosis_agent_instructions,
-            input_schema=FinalDiagnosisRequest,
             output_schema=FinalDiagnosisResponse,
             **kwargs
         )
+
+    @classmethod
+    def observability_metrics(cls):
+        return correctness_metrics()

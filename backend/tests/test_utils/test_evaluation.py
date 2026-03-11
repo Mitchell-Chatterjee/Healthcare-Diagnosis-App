@@ -11,7 +11,7 @@ from tests.test_utils.plausible_health_scenarios import HealthcareScenario
 from tests.test_utils.plausible_health_scenarios import all_test_scenarios
 
 healthcare_workflow = HealthcareWorkflow(use_storage=False)
-# healthcare_workflow.workflow_session_state["eval_llm"] = model
+# healthcare_workflow.session_state["eval_llm"] = model
 
 # Set to True to run only the first test, False to run all tests
 RUN_SINGLE_TEST = True
@@ -24,7 +24,9 @@ def test_healthcare_workflow(scenario: HealthcareScenario):
     # Create an observed callback with the scenario already bound
     golden = Golden(input=scenario.user_query, name='Test 1')
     # Bind the expected tools to the workflow session state
-    healthcare_workflow.workflow_session_state["expected_tools_by_agent"] = scenario.expected_tools_by_agent
-    healthcare_workflow.workflow_session_state["expected_output"] = scenario.diagnosis
+    if healthcare_workflow.session_state is None:
+        healthcare_workflow.session_state = {}
+    healthcare_workflow.session_state["expected_tools_by_agent"] = scenario.expected_tools_by_agent
+    healthcare_workflow.session_state["expected_output"] = scenario.diagnosis
     # Use assert_test with observed_callback for component-level evaluation
     assert_test(golden=golden, observed_callback=healthcare_workflow.run)

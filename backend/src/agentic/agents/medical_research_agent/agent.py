@@ -1,22 +1,12 @@
-from agno.agent import Agent
 from agno.tools.googlesearch import GoogleSearchTools
 from agno.tools.reasoning import ReasoningTools
 from src.common.models.models import LanguageModelFactory
 from src.agentic.agents.medical_research_agent.prompts import medical_research_agent_description, medical_research_agent_instructions
+from tests.test_utils.instrumentation.implementations.agno_inheritance import InstrumentedAgent
+from tests.test_utils.utils.eval_metrics import answer_relevancy_metrics
 
-# TODO: Fix test utils imports when test infrastructure is ready
-# from deepeval.tracing import observe, update_current_span
-# from deepeval.test_case import LLMTestCase
-# from src.tests.test_utils.utils.eval_metrics import answer_relevancy_metrics
 
-import asyncio
-
-# Optionally add memory/storage if needed
-# from agno.storage.sqlite import SqliteStorage
-# from agno.memory.v2.db.sqlite import SqliteMemoryDb
-# from agno.memory.v2.memory import Memory
-
-class MedicalResearchAgent(Agent):
+class MedicalResearchAgent(InstrumentedAgent):
     """
     Agent specialized in conducting medical research based on symptoms.
     Inherits from the base Agent class in agno.
@@ -42,3 +32,7 @@ class MedicalResearchAgent(Agent):
             instructions=medical_research_agent_instructions,
             **kwargs
         )
+
+    @classmethod
+    def observability_metrics(cls):
+        return answer_relevancy_metrics()

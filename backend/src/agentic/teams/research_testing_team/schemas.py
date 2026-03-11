@@ -30,7 +30,7 @@ class TestResult(BaseModel):
 
 class ResearchTestingResponse(BaseModel):
     """Output schema for the Research Testing Team."""
-    original_inquiry: str = Field(..., description="The original patient inquiry")
+    original_inquiry: Optional[str] = Field(None, description="The original patient inquiry")
     differential_context: DifferentialDiagnosisResponse = Field(
         ..., 
         description="Differential diagnosis context that guided the research and testing"

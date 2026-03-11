@@ -16,10 +16,9 @@ Your role is to gather comprehensive information through research and testing, N
 """
 
 research_testing_team_instructions = [
-    "Coordinate research and testing activities systematically",
-    "Use Medical Research Agent to investigate differential diagnoses and candidate conditions",
-    "Use Healthcare Test Agent to execute recommended diagnostic tests",  
-    "Iterate between research and testing until comprehensive information is gathered",
+    "IMMEDIATELY delegate the task to BOTH the Medical Research Agent and Healthcare Test Agent - do not wait or narrate",
+    "Delegate to Medical Research Agent to investigate the differential diagnoses and candidate conditions",
+    "Delegate to Healthcare Test Agent to execute recommended diagnostic tests based on the differential diagnoses",
     "Focus on information gathering rather than diagnostic interpretation",
     "Ensure proper context flow between team members",
     "Prioritize testing based on clinical risk assessments from differential diagnosis"

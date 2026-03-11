@@ -3,7 +3,6 @@ from .agentic import (
     DiagnosticAgent,
     MedicalResearchAgent,
     MedicalTestAgent,
-    SymptomExtractionAgent,
     ResearchTestingTeam,
     HealthcareWorkflow
 )
@@ -18,7 +17,6 @@ __all__ = [
     "DiagnosticAgent",
     "MedicalResearchAgent", 
     "MedicalTestAgent",
-    "SymptomExtractionAgent",
     
     # Teams
     "ResearchTestingTeam",

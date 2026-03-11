@@ -10,24 +10,32 @@ from agno.run.workflow import WorkflowRunOutput
 from agno.run.agent import RunOutput
 from agno.run.team import TeamRunOutput
 
+from tests.test_utils.instrumentation.base.inheritance_base import InstrumentedBase
+
 AgnoInstance = Union[Agent, Team, Workflow]
 AgnoResponse = Union[RunOutput, WorkflowRunOutput, TeamRunOutput]
 
 
 def create_test_case(instance: AgnoInstance, message: str, response: AgnoResponse) -> LLMTestCase:
     """Create an LLMTestCase for the current interaction."""
-    actual_output = response.content
-    
+    from pydantic import BaseModel as PydanticBaseModel
+    raw_output = response.content
+    if isinstance(raw_output, PydanticBaseModel):
+        actual_output = raw_output.model_dump_json()
+    else:
+        actual_output = str(raw_output) if raw_output is not None else ""
+    session_state = instance.session_state or {}
+
     tools_called = None
     expected_tools = None
     if hasattr(response, "tools") and response.tools:
         tools_called = [ToolCall(name=tool.tool_name) for tool in response.tools]
-        expected_tools = instance.session_state.get("expected_tools_by_agent", {}).get(instance.__class__.__name__, None)  # TODO: Make this expected into a shared enum
+        expected_tools = session_state.get("expected_tools_by_agent", {}).get(instance.__class__.__name__, None)  # TODO: Make this expected into a shared enum
 
     return LLMTestCase(
         input=message,
         actual_output=actual_output,
-        expected_output=instance.session_state.get("expected_output", None), # TODO: Also this one
+        expected_output=session_state.get("expected_output", None), # TODO: Also this one
         retrieval_context=[actual_output], 
         tools_called=tools_called, 
         expected_tools=expected_tools
@@ -53,12 +61,33 @@ def create_instrumented_run_method(
     """
     @functools.wraps(original_run_method)
     @observe(type=instance_type, name=instance_name, metrics=observability_metrics)
-    def instrumented_run(self, message, *args, **kwargs) -> AgnoResponse:
+    def instrumented_run(self, input, *args, **kwargs) -> AgnoResponse:
         """Instrumented run method with observability and type safety."""        
-        response: AgnoResponse = original_run_method(self, message, *args, **kwargs)
-        update_current_span(test_case=create_test_case(self, message, response))
+        response: AgnoResponse = original_run_method(self, input, *args, **kwargs)
+        update_current_span(test_case=create_test_case(self, input, response))
         return response
         
+    return instrumented_run
+
+
+def create_instrumented_workflow_run_method(
+    original_run_method,
+    instance_type: str,
+    instance_name: str,
+    observability_metrics: List[BaseMetric]
+):
+    """Create an instrumented version of the run method for Workflows.
+    
+    Workflows use 'input' as the parameter name instead of 'message'.
+    """
+    @functools.wraps(original_run_method)
+    @observe(type=instance_type, name=instance_name, metrics=observability_metrics)
+    def instrumented_run(self, input, *args, **kwargs) -> AgnoResponse:
+        """Instrumented run method for workflows."""
+        response: AgnoResponse = original_run_method(self, input, *args, **kwargs)
+        update_current_span(test_case=create_test_case(self, input, response))
+        return response
+
     return instrumented_run
 
 # Direct Inheritance Base Classes with Required Explicit Metrics
@@ -124,6 +153,6 @@ class InstrumentedWorkflow(Workflow, InstrumentedBase):
     def _instrument_run_method(cls):
         """Instrument the run method for this workflow class."""
         original_run = cls.run
-        cls.run = create_instrumented_run_method(
+        cls.run = create_instrumented_workflow_run_method(
             original_run, cls._instance_type, cls.__name__, cls.observability_metrics()
         )

@@ -1,6 +1,6 @@
 """Model configurations for healthcare diagnosis app."""
 
-from agno.models.azure import AzureOpenAI
+from agno.models.azure import AzureAIFoundry
 from agno.models.base import Model
 from ..config.config import get_config
 
@@ -12,10 +12,9 @@ class LanguageModelFactory:
         """Create a GPT-OSS model using centralized configuration."""
         config = get_config()
         azure_config = config.language_models.azure_gpt_oss
-        return AzureOpenAI(
+        return AzureAIFoundry(
             id=azure_config.model_name,
             api_key=azure_config.api_key,
-            azure_deployment=azure_config.deployment_name,
             azure_endpoint=azure_config.endpoint,
             api_version=azure_config.api_version
         )
